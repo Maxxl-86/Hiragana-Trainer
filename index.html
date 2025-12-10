@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hiragana Trainer (PWA)</title>
+  <meta name="theme-color" content="#22c55e">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Hiragana Trainer (PWA)</h1>
+    <p>Installierbar · Offline-fähig · Keine Cookies</p>
+  </header>
+
+  <main>
+    <section class="controls">
+      <div class="range">
+        <label>Block von:
+          <select id="blockFrom"></select>
+        </label>
+        <label>bis:
+          <select id="blockTo"></select>
+        </label>
+      </div>
+
+      <div class="mode">
+        <label>Anzeigemodus:
+          <select id="mode">
+            <option value="kana">Hiragana → Romaji</option>
+            <option value="romaji">Romaji → Hiragana</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="toggles">
+        <label><input type="checkbox" id="showSolution"/> Lösung zeigen?</label>
+        <label><input type="checkbox" id="avoidRepeats" checked/> Wiederholungen vermeiden?</label>
+      </div>
+
+      <div class="buttons">
+        <button id="newDraw">Neu ziehen</button>
+        <button id="toggleSolution">Lösung umschalten</button>
+        <button id="reset">Reset Verbraucht</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="question" id="question">?</div>
+      <div class="answer" id="answer" hidden>?</div>
+      <div class="meta" id="meta"></div>
+    </section>
+
+    <section class="status">
+      <div>Verbraucht in aktuellem Bereich: <span id="consumed">0</span>/<span id="total">0</span></div>
+    </section>
+  </main>
+
+  <footer>
+    <small>© 2025 – Hiragana Trainer (PWA). Quelle: eigene Liste.</small>
+  </footer>
+
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(console.error);}</script>
+  <script src="app-inline.js"></script>
+</body>
+</html>
