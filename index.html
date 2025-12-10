@@ -61,7 +61,21 @@
     <small>© 2025 – Hiragana Trainer (PWA)</small>
   </footer>
 
-  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(console.error);}</script>
+  <script>
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.register('./sw.js').then(()=>{
+        navigator.serviceWorker.addEventListener('message', (event) => {
+          if(event.data && event.data.type === 'SW_UPDATED'){
+            const bar = document.createElement('div');
+            bar.className = 'update-bar';
+            bar.textContent = 'Neue Version installiert – Seite aktualisiert sich jetzt.';
+            document.body.appendChild(bar);
+            setTimeout(()=>{ window.location.reload(); }, 1200);
+          }
+        });
+      }).catch(console.error);
+    }
+  </script>
   <script src="app-inline.js"></script>
 </body>
 </html>

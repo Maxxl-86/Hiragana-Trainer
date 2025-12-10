@@ -1,1 +1,1 @@
-Automatisches Update aktiviert. Bei Änderungen CACHE_NAME erhöhen und Dateien hochladen.
+Finale PWA mit Mobile-Fix und Auto-Update. Bei Änderungen CACHE_NAME hochzählen und Dateien hochladen.
