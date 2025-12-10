@@ -1,112 +1,88 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Hiragana Trainer (PWA)</title>
-  <meta name="theme-color" content="#22c55e">
+
+  <!-- PWA essentials -->
   <link rel="manifest" href="manifest.webmanifest">
-  <link rel="stylesheet" href="style.css" />
+  <meta name="theme-color" content="#22c55e" />
+  <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="icon-512.png">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header>
     <h1>Hiragana Trainer (PWA)</h1>
-    <p>Installierbar · Offline-fähig · Keine Cookies</p>
-    <button id="installBtn" class="install-btn" aria-label="App installieren">App installieren</button>
+    <p id="status" aria-live="polite"></p>
+    <button id="installBtn" class="install-btn" hidden>App installieren</button>
   </header>
 
   <main>
-    <section class="controls">
-      <div class="range">
-        <label>Block von:
-          <select id="blockFrom"></select>
-        </label>
-        <label>bis:
-          <select id="blockTo"></select>
-        </label>
-      </div>
-
-      <div class="mode">
+    <section class="controls" aria-label="Einstellungen">
+      <label>Block von: <select id="blockFrom"></select></label>
+      <label>bis: <select id="blockTo"></select></label>
+      <div class="toggles">
         <label>Anzeigemodus:
           <select id="mode">
             <option value="kana">Hiragana → Romaji</option>
             <option value="romaji">Romaji → Hiragana</option>
           </select>
         </label>
-      </div>
-
-      <div class="toggles">
-        <label><input type="checkbox" id="showSolution"/> Lösung zeigen?</label>
-        <label><input type="checkbox" id="avoidRepeats" checked/> Wiederholungen vermeiden?</label>
-      </div>
-
-      <div class="buttons">
-        <button id="newDraw">Neu ziehen</button>
-        <button id="toggleSolution">Lösung umschalten</button>
-        <button id="reset">Reset Verbraucht</button>
+        <label><input id="showSolution" type="checkbox"> Lösung zeigen?</label>
+        <label><input id="avoidRepeats" type="checkbox" checked> Wiederholungen vermeiden?</label>
       </div>
     </section>
 
     <section class="card">
-      <div class="question" id="question">?</div>
-      <div class="answer" id="answer" hidden>?</div>
-      <div class="meta" id="meta"></div>
-    </section>
-
-    <section class="status">
-      <div>Verbraucht in aktuellem Bereich: <span id="consumed">0</span>/<span id="total">0</span></div>
+      <div id="question" class="question">?</div>
+      <div id="answer" class="answer" hidden>?</div>
+      <div id="meta" aria-live="polite"></div>
+      <div class="buttons">
+        <button id="newDraw">Neu ziehen</button>
+        <button id="toggleSolution">Lösung umschalten</button>
+        <button id="reset">Reset</button>
+      </div>
+      <p>Verbraucht in aktuellem Bereich: <span id="consumed">0</span>/<span id="total">0</span></p>
     </section>
   </main>
 
-  <footer>
-    <small>© 2025 – Hiragana Trainer (PWA)</small>
-  </footer>
+  <div id="updateBar" class="update-bar" hidden>
+    Neue Version verfügbar – bitte App neu laden.
+  </div>
 
-  <script src="app-inline.js"></script>
+  <!-- App logic -->
+  <script src="app-inline.js" defer></script>
+
+  <!-- Install UI + SW registration -->
   <script>
-    // SW + Install Button after app script to ensure elements exist
-    (function(){
-      let deferredPrompt = null;
-      const installBtn = document.getElementById('installBtn');
-      if(installBtn){ installBtn.style.display = 'inline-block'; }
+    let deferredPrompt = null;
+    const installBtn = document.getElementById('installBtn');
+    const statusEl = document.getElementById('status');
 
-      window.addEventListener('beforeinstallprompt', (e) => {
-        e.preventDefault();
-        deferredPrompt = e;
-        if(installBtn) installBtn.disabled = false;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.hidden = false;
+      statusEl.textContent = 'Installationsoption verfügbar.';
+    });
+
+    installBtn?.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      installBtn.hidden = true;
+    });
+
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js', { scope: '/Hiragana-Trainer/' })
+          .then(() => statusEl.textContent = 'Service Worker aktiv.')
+          .catch(err => statusEl.textContent = 'SW-Fehler: ' + err);
       });
-
-      if(installBtn){
-        installBtn.addEventListener('click', async () => {
-          if (deferredPrompt) {
-            deferredPrompt.prompt();
-            await deferredPrompt.userChoice;
-            deferredPrompt = null;
-            installBtn.disabled = true;
-          } else {
-            const bar = document.createElement('div');
-            bar.className = 'update-bar';
-            bar.textContent = 'Installieren nicht verfügbar. Öffne die Seite direkt in Chrome.';
-            document.body.appendChild(bar);
-            setTimeout(()=> bar.remove(), 2500);
-          }
-        });
-      }
-
-      if('serviceWorker' in navigator){
-        navigator.serviceWorker.register('./sw.js').then(()=>{
-          navigator.serviceWorker.addEventListener('message', (event) => {
-            if(event.data && event.data.type === 'SW_UPDATED'){
-              const bar = document.createElement('div');
-              bar.className = 'update-bar';
-              bar.textContent = 'Neue Version installiert – Seite aktualisiert sich jetzt.';
-              document.body.appendChild(bar);
-              setTimeout(()=>{ window.location.reload(); }, 1200);
-            }
-          });
-        }).catch(console.error);
-      }
-    })();
+    }
   </script>
 </body>
 </html>
