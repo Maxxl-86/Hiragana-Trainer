@@ -1,7 +1,8 @@
 :root{--bg:#0f172a;--panel:#111827;--text:#e5e7eb;--accent:#22c55e;--accentText:#052e1e}
+*{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;overflow-x:hidden}
 header{text-align:center;padding:1rem}
-.install-btn{display:none;background:var(--accent);color:var(--accentText);border:none;padding:.6rem 1rem;border-radius:8px;font-weight:700;cursor:pointer;margin-top:.5rem}
+.install-btn{background:var(--accent);color:var(--accentText);border:none;padding:.6rem 1rem;border-radius:8px;font-weight:700;cursor:pointer;margin-top:.5rem}
 main{max-width:900px;margin:0 auto;padding:1rem}
 .controls{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem;background:var(--panel);padding:1rem;border-radius:12px}
 .controls label{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}

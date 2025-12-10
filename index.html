@@ -12,7 +12,7 @@
   <header>
     <h1>Hiragana Trainer (PWA)</h1>
     <p>Installierbar · Offline-fähig · Keine Cookies</p>
-    <button id="installBtn" class="install-btn">App installieren</button>
+    <button id="installBtn" class="install-btn" aria-label="App installieren">App installieren</button>
   </header>
 
   <main>
@@ -63,20 +63,29 @@
   </footer>
 
   <script>
-    let deferredPrompt;
+    let deferredPrompt = null;
+    const installBtn = document.getElementById('installBtn');
+    installBtn.style.display = 'inline-block'; // Fallback: sichtbar lassen
+
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      document.getElementById('installBtn').style.display = 'inline-block';
+      installBtn.disabled = false;
     });
 
-    document.getElementById('installBtn').addEventListener('click', async () => {
+    installBtn.addEventListener('click', async () => {
       if (deferredPrompt) {
         deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log('Installationsentscheidung:', outcome);
+        await deferredPrompt.userChoice;
         deferredPrompt = null;
-        document.getElementById('installBtn').style.display = 'none';
+        installBtn.disabled = true;
+      } else {
+        // Hinweis, wenn Installation gerade nicht möglich ist
+        const bar = document.createElement('div');
+        bar.className = 'update-bar';
+        bar.textContent = 'Installieren nicht verfügbar: Öffne die Seite direkt in Chrome, nicht im Messenger.';
+        document.body.appendChild(bar);
+        setTimeout(()=>{ bar.remove(); }, 3000);
       }
     });
 
