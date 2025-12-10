@@ -1,1 +1,75 @@
 :root{--bg:#0f172a;--panel:#111827;--text:#e5e7eb;--accent:#22c55e;}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui;-apple-system,Segoe UI,Roboto,Arial}header,footer{padding:1rem;text-align:center}main{max-width:900px;margin:0 auto;padding:1rem}.controls{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;background:var(--panel);padding:1rem;border-radius:12px}.card{margin-top:1rem;background:var(--panel);border-radius:12px;padding:2rem;text-align:center}.question{font-size:clamp(3rem,12vw,10rem)}.answer{margin-top:1rem;font-size:clamp(1.5rem,5vw,3rem)}.status{margin-top:1rem;text-align:right}
+
+/* ---------- Mobile-Optimierungen ---------- */
+@media (max-width: 640px) {
+  /* Layout der Steuerleiste: statt 3 Spalten -> Stapeln */
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr;     /* eine Spalte */
+    gap: 0.75rem;
+    padding: 0.9rem;
+    /* Verhindert, dass irgendetwas „über den Rand“ raussteht */
+    overflow: hidden;
+  }
+
+  /* Labels/Zeileninhalt: nebeneinander, aber mit automatischem Umbrechen */
+  .controls label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;                 /* bricht um, statt zu überlaufen */
+  }
+
+  /* Dropdowns und Checkboxen: volle Breite, gut tippbar */
+  .controls select {
+    width: 100%;
+    min-width: 0;                    /* verhindert Mindestbreiten */
+    padding: 0.6rem;
+    font-size: 1rem;
+  }
+
+  .toggles {
+    display: grid;
+    grid-template-columns: 1fr;      /* jede Toggle-Zeile einzeln */
+    gap: 0.5rem;
+  }
+
+  .buttons {
+    display: grid;
+    grid-template-columns: 1fr;      /* Buttons untereinander */
+    gap: 0.5rem;
+  }
+
+  button {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+  }
+
+  /* Karte/Frage auf kleinen Screens etwas kleiner, um Platz zu schaffen */
+  .question {
+    font-size: clamp(2.2rem, 12vw, 6rem);
+    word-break: keep-all;
+  }
+
+  .answer {
+    font-size: clamp(1.2rem, 5vw, 2.2rem);
+  }
+
+  /* Gesamtes Haupt-Layout: seitliche Luft + kein Horizontalscrolling */
+  main {
+    padding: 0.75rem;
+  }
+  body {
+    overflow-x: hidden;              /* verhindert horizontales Scrollen */
+  }
+}
+
+/* iOS-Safe-Area (Notch) – verhindert, dass UI unter der Home-Bar liegt */
+@supports (padding: max(0px)) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left:  env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
