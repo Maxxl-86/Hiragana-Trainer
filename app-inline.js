@@ -1,63 +1,52 @@
 
 window.addEventListener("DOMContentLoaded",()=>{
-  // --- Datenquellen ---
   const H = [
     {kana:"あ",romaji:"a",block:"Block 1 Vokale",blockNr:1,script:'H'},
     {kana:"い",romaji:"i",block:"Block 1 Vokale",blockNr:1,script:'H'},
     {kana:"う",romaji:"u",block:"Block 1 Vokale",blockNr:1,script:'H'},
     {kana:"え",romaji:"e",block:"Block 1 Vokale",blockNr:1,script:'H'},
     {kana:"お",romaji:"o",block:"Block 1 Vokale",blockNr:1,script:'H'},
-
     {kana:"か",romaji:"ka",block:"Block 2 K-Reihe",blockNr:2,script:'H'},
     {kana:"き",romaji:"ki",block:"Block 2 K-Reihe",blockNr:2,script:'H'},
-    {kana:"く",romaji:"ku",blockNr:2,block:"Block 2 K-Reihe",script:'H'},
-    {kana:"け",romaji:"ke",blockNr:2,block:"Block 2 K-Reihe",script:'H'},
-    {kana:"こ",romaji:"ko",blockNr:2,block:"Block 2 K-Reihe",script:'H'},
-
+    {kana:"く",romaji:"ku",block:"Block 2 K-Reihe",blockNr:2,script:'H'},
+    {kana:"け",romaji:"ke",block:"Block 2 K-Reihe",blockNr:2,script:'H'},
+    {kana:"こ",romaji:"ko",block:"Block 2 K-Reihe",blockNr:2,script:'H'},
     {kana:"さ",romaji:"sa",block:"Block 3 S-Reihe",blockNr:3,script:'H'},
     {kana:"し",romaji:"shi",block:"Block 3 S-Reihe",blockNr:3,script:'H'},
     {kana:"す",romaji:"su",block:"Block 3 S-Reihe",blockNr:3,script:'H'},
     {kana:"せ",romaji:"se",block:"Block 3 S-Reihe",blockNr:3,script:'H'},
     {kana:"そ",romaji:"so",block:"Block 3 S-Reihe",blockNr:3,script:'H'},
-
     {kana:"た",romaji:"ta",block:"Block 4 T-Reihe",blockNr:4,script:'H'},
     {kana:"ち",romaji:"chi",block:"Block 4 T-Reihe",blockNr:4,script:'H'},
     {kana:"つ",romaji:"tsu",block:"Block 4 T-Reihe",blockNr:4,script:'H'},
     {kana:"て",romaji:"te",block:"Block 4 T-Reihe",blockNr:4,script:'H'},
     {kana:"と",romaji:"to",block:"Block 4 T-Reihe",blockNr:4,script:'H'},
-
     {kana:"な",romaji:"na",block:"Block 5 N-Reihe",blockNr:5,script:'H'},
     {kana:"に",romaji:"ni",block:"Block 5 N-Reihe",blockNr:5,script:'H'},
     {kana:"ぬ",romaji:"nu",block:"Block 5 N-Reihe",blockNr:5,script:'H'},
     {kana:"ね",romaji:"ne",block:"Block 5 N-Reihe",blockNr:5,script:'H'},
     {kana:"の",romaji:"no",block:"Block 5 N-Reihe",blockNr:5,script:'H'},
-
     {kana:"は",romaji:"ha",block:"Block 6 H-Reihe",blockNr:6,script:'H'},
     {kana:"ひ",romaji:"hi",block:"Block 6 H-Reihe",blockNr:6,script:'H'},
     {kana:"ふ",romaji:"fu",block:"Block 6 H-Reihe",blockNr:6,script:'H'},
     {kana:"へ",romaji:"he",block:"Block 6 H-Reihe",blockNr:6,script:'H'},
     {kana:"ほ",romaji:"ho",block:"Block 6 H-Reihe",blockNr:6,script:'H'},
-
     {kana:"ま",romaji:"ma",block:"Block 7 M-Reihe",blockNr:7,script:'H'},
     {kana:"み",romaji:"mi",block:"Block 7 M-Reihe",blockNr:7,script:'H'},
     {kana:"む",romaji:"mu",block:"Block 7 M-Reihe",blockNr:7,script:'H'},
     {kana:"め",romaji:"me",block:"Block 7 M-Reihe",blockNr:7,script:'H'},
     {kana:"も",romaji:"mo",block:"Block 7 M-Reihe",blockNr:7,script:'H'},
-
     {kana:"や",romaji:"ya",block:"Block 8 Y-Reihe",blockNr:8,script:'H'},
     {kana:"ゆ",romaji:"yu",block:"Block 8 Y-Reihe",blockNr:8,script:'H'},
     {kana:"よ",romaji:"yo",block:"Block 8 Y-Reihe",blockNr:8,script:'H'},
-
     {kana:"ら",romaji:"ra",block:"Block 9 R-Reihe",blockNr:9,script:'H'},
     {kana:"り",romaji:"ri",block:"Block 9 R-Reihe",blockNr:9,script:'H'},
     {kana:"る",romaji:"ru",block:"Block 9 R-Reihe",blockNr:9,script:'H'},
     {kana:"れ",romaji:"re",block:"Block 9 R-Reihe",blockNr:9,script:'H'},
     {kana:"ろ",romaji:"ro",block:"Block 9 R-Reihe",blockNr:9,script:'H'},
-
     {kana:"わ",romaji:"wa",block:"Block 10 W und ん",blockNr:10,script:'H'},
     {kana:"を",romaji:"wo",block:"Block 10 W und ん",blockNr:10,script:'H'},
     {kana:"ん",romaji:"n",block:"Block 10 W und ん",blockNr:10,script:'H'},
-
     {kana:"が",romaji:"ga",block:"Block 11 Dakuten",blockNr:11,script:'H'},
     {kana:"ぎ",romaji:"gi",block:"Block 11 Dakuten",blockNr:11,script:'H'},
     {kana:"ぐ",romaji:"gu",block:"Block 11 Dakuten",blockNr:11,script:'H'},
@@ -78,13 +67,11 @@ window.addEventListener("DOMContentLoaded",()=>{
     {kana:"ぶ",romaji:"bu",block:"Block 11 Dakuten",blockNr:11,script:'H'},
     {kana:"べ",romaji:"be",block:"Block 11 Dakuten",blockNr:11,script:'H'},
     {kana:"ぼ",romaji:"bo",block:"Block 11 Dakuten",blockNr:11,script:'H'},
-
     {kana:"ぱ",romaji:"pa",block:"Block 12 Handakuten",blockNr:12,script:'H'},
     {kana:"ぴ",romaji:"pi",block:"Block 12 Handakuten",blockNr:12,script:'H'},
     {kana:"ぷ",romaji:"pu",block:"Block 12 Handakuten",blockNr:12,script:'H'},
     {kana:"ぺ",romaji:"pe",block:"Block 12 Handakuten",blockNr:12,script:'H'},
     {kana:"ぽ",romaji:"po",block:"Block 12 Handakuten",blockNr:12,script:'H'},
-
     {kana:"ゃ",romaji:"ya",block:"Block 13 Kleine Kana",blockNr:13,script:'H'},
     {kana:"ゅ",romaji:"yu",block:"Block 13 Kleine Kana",blockNr:13,script:'H'},
     {kana:"ょ",romaji:"yo",block:"Block 13 Kleine Kana",blockNr:13,script:'H'},
@@ -97,57 +84,47 @@ window.addEventListener("DOMContentLoaded",()=>{
     {kana:"ウ",romaji:"u",block:"Block 1 Vokale",blockNr:1,script:'K'},
     {kana:"エ",romaji:"e",block:"Block 1 Vokale",blockNr:1,script:'K'},
     {kana:"オ",romaji:"o",block:"Block 1 Vokale",blockNr:1,script:'K'},
-
     {kana:"カ",romaji:"ka",block:"Block 2 K-Reihe",blockNr:2,script:'K'},
     {kana:"キ",romaji:"ki",block:"Block 2 K-Reihe",blockNr:2,script:'K'},
     {kana:"ク",romaji:"ku",block:"Block 2 K-Reihe",blockNr:2,script:'K'},
     {kana:"ケ",romaji:"ke",block:"Block 2 K-Reihe",blockNr:2,script:'K'},
     {kana:"コ",romaji:"ko",block:"Block 2 K-Reihe",blockNr:2,script:'K'},
-
     {kana:"サ",romaji:"sa",block:"Block 3 S-Reihe",blockNr:3,script:'K'},
     {kana:"シ",romaji:"shi",block:"Block 3 S-Reihe",blockNr:3,script:'K'},
     {kana:"ス",romaji:"su",block:"Block 3 S-Reihe",blockNr:3,script:'K'},
     {kana:"セ",romaji:"se",block:"Block 3 S-Reihe",blockNr:3,script:'K'},
     {kana:"ソ",romaji:"so",block:"Block 3 S-Reihe",blockNr:3,script:'K'},
-
     {kana:"タ",romaji:"ta",block:"Block 4 T-Reihe",blockNr:4,script:'K'},
     {kana:"チ",romaji:"chi",block:"Block 4 T-Reihe",blockNr:4,script:'K'},
     {kana:"ツ",romaji:"tsu",block:"Block 4 T-Reihe",blockNr:4,script:'K'},
     {kana:"テ",romaji:"te",block:"Block 4 T-Reihe",blockNr:4,script:'K'},
     {kana:"ト",romaji:"to",block:"Block 4 T-Reihe",blockNr:4,script:'K'},
-
     {kana:"ナ",romaji:"na",block:"Block 5 N-Reihe",blockNr:5,script:'K'},
     {kana:"ニ",romaji:"ni",block:"Block 5 N-Reihe",blockNr:5,script:'K'},
     {kana:"ヌ",romaji:"nu",block:"Block 5 N-Reihe",blockNr:5,script:'K'},
     {kana:"ネ",romaji:"ne",block:"Block 5 N-Reihe",blockNr:5,script:'K'},
     {kana:"ノ",romaji:"no",block:"Block 5 N-Reihe",blockNr:5,script:'K'},
-
     {kana:"ハ",romaji:"ha",block:"Block 6 H-Reihe",blockNr:6,script:'K'},
     {kana:"ヒ",romaji:"hi",block:"Block 6 H-Reihe",blockNr:6,script:'K'},
     {kana:"フ",romaji:"fu",block:"Block 6 H-Reihe",blockNr:6,script:'K'},
     {kana:"ヘ",romaji:"he",block:"Block 6 H-Reihe",blockNr:6,script:'K'},
     {kana:"ホ",romaji:"ho",block:"Block 6 H-Reihe",blockNr:6,script:'K'},
-
     {kana:"マ",romaji:"ma",block:"Block 7 M-Reihe",blockNr:7,script:'K'},
     {kana:"ミ",romaji:"mi",block:"Block 7 M-Reihe",blockNr:7,script:'K'},
     {kana:"ム",romaji:"mu",block:"Block 7 M-Reihe",blockNr:7,script:'K'},
     {kana:"メ",romaji:"me",block:"Block 7 M-Reihe",blockNr:7,script:'K'},
     {kana:"モ",romaji:"mo",block:"Block 7 M-Reihe",blockNr:7,script:'K'},
-
     {kana:"ヤ",romaji:"ya",block:"Block 8 Y-Reihe",blockNr:8,script:'K'},
     {kana:"ユ",romaji:"yu",block:"Block 8 Y-Reihe",blockNr:8,script:'K'},
     {kana:"ヨ",romaji:"yo",block:"Block 8 Y-Reihe",blockNr:8,script:'K'},
-
     {kana:"ラ",romaji:"ra",block:"Block 9 R-Reihe",blockNr:9,script:'K'},
     {kana:"リ",romaji:"ri",block:"Block 9 R-Reihe",blockNr:9,script:'K'},
     {kana:"ル",romaji:"ru",block:"Block 9 R-Reihe",blockNr:9,script:'K'},
     {kana:"レ",romaji:"re",block:"Block 9 R-Reihe",blockNr:9,script:'K'},
     {kana:"ロ",romaji:"ro",block:"Block 9 R-Reihe",blockNr:9,script:'K'},
-
     {kana:"ワ",romaji:"wa",block:"Block 10 W und ン",blockNr:10,script:'K'},
     {kana:"ヲ",romaji:"wo",block:"Block 10 W und ン",blockNr:10,script:'K'},
     {kana:"ン",romaji:"n",block:"Block 10 W und ン",blockNr:10,script:'K'},
-
     {kana:"ガ",romaji:"ga",block:"Block 11 Dakuten",blockNr:11,script:'K'},
     {kana:"ギ",romaji:"gi",block:"Block 11 Dakuten",blockNr:11,script:'K'},
     {kana:"グ",romaji:"gu",block:"Block 11 Dakuten",blockNr:11,script:'K'},
@@ -168,18 +145,15 @@ window.addEventListener("DOMContentLoaded",()=>{
     {kana:"ブ",romaji:"bu",block:"Block 11 Dakuten",blockNr:11,script:'K'},
     {kana:"ベ",romaji:"be",block:"Block 11 Dakuten",blockNr:11,script:'K'},
     {kana:"ボ",romaji:"bo",block:"Block 11 Dakuten",blockNr:11,script:'K'},
-
     {kana:"パ",romaji:"pa",block:"Block 12 Handakuten",blockNr:12,script:'K'},
     {kana:"ピ",romaji:"pi",block:"Block 12 Handakuten",blockNr:12,script:'K'},
     {kana:"プ",romaji:"pu",block:"Block 12 Handakuten",blockNr:12,script:'K'},
     {kana:"ペ",romaji:"pe",block:"Block 12 Handakuten",blockNr:12,script:'K'},
     {kana:"ポ",romaji:"po",block:"Block 12 Handakuten",blockNr:12,script:'K'},
-
     {kana:"ャ",romaji:"ya",block:"Block 13 Kleine Kana",blockNr:13,script:'K'},
     {kana:"ュ",romaji:"yu",block:"Block 13 Kleine Kana",blockNr:13,script:'K'},
     {kana:"ョ",romaji:"yo",block:"Block 13 Kleine Kana",blockNr:13,script:'K'},
     {kana:"ッ",romaji:"tsu",block:"Block 13 Kleine Kana",blockNr:13,script:'K'},
-
     {kana:"ァ",romaji:"a",block:"Block 14 Kleine Vokale",blockNr:14,script:'K'},
     {kana:"ィ",romaji:"i",block:"Block 14 Kleine Vokale",blockNr:14,script:'K'},
     {kana:"ゥ",romaji:"u",block:"Block 14 Kleine Vokale",blockNr:14,script:'K'},
@@ -271,12 +245,22 @@ ${d.romaji}`; }
   }
 
   function wire(){
+    // 1) Script-Wechsel: Blöcke neu aufbauen
+    els.script.addEventListener('change', () => { fillBlocks(); updateTotals(); render(lastPick); });
+
+    // 2) Block-Dropdowns: NUR neu berechnen, NICHT fillBlocks() aufrufen
+    els.blockFrom.addEventListener('change', () => { updateTotals(); render(lastPick); });
+    els.blockTo.addEventListener('change', () => { updateTotals(); render(lastPick); });
+
+    // 3) Restliche Controls
+    els.mode.addEventListener('change', () => { render(lastPick); });
+    els.showSolution.addEventListener('change', () => { render(lastPick); });
+    els.avoidRepeats.addEventListener('change', () => { /* kein Reset nötig */ });
+
     els.newDraw.addEventListener('click', drawNew);
     els.toggleSolution.addEventListener('click', () => { els.showSolution.checked = !els.showSolution.checked; render(lastPick); });
     els.reset.addEventListener('click', () => { consumed.clear(); updateTotals(); render(lastPick); });
-    ['script','blockFrom','blockTo','mode','showSolution','avoidRepeats'].forEach(id => {
-      els[id].addEventListener('change', () => { fillBlocks(); updateTotals(); render(lastPick); });
-    });
+
     document.addEventListener('keydown', (e) => {
       if(e.key === 'Enter') drawNew();
       if(e.key.toLowerCase() === 's') { els.showSolution.checked = !els.showSolution.checked; render(lastPick); }
