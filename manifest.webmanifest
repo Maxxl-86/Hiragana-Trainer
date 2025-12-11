@@ -1,7 +1,7 @@
 {
-  "name": "Hiragana Trainer",
-  "short_name": "Hiragana",
-  "description": "Offline Hiragana Lerntrainer (PWA)",
+  "name": "Kana Trainer",
+  "short_name": "Kana",
+  "description": "Offline Kana Lerntrainer (Hiragana & Katakana, PWA)",
   "start_url": "/Hiragana-Trainer/",
   "scope": "/Hiragana-Trainer/",
   "display": "standalone",

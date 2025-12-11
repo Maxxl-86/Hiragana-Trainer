@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Hiragana Trainer (PWA)</title>
+  <title>Kana Trainer (PWA) – Hiragana & Katakana</title>
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#22c55e" />
   <link rel="icon" href="icon-192.png" sizes="192x192" type="image/png">
@@ -12,20 +12,27 @@
 </head>
 <body>
   <header>
-    <h1>Hiragana Trainer (PWA)</h1>
+    <h1>Kana Trainer (PWA)</h1>
     <p id="status" aria-live="polite"></p>
     <button id="installBtn" class="install-btn" hidden>App installieren</button>
   </header>
 
   <main>
     <section class="controls" aria-label="Einstellungen">
+      <label>Schrift:
+        <select id="script">
+          <option value="hiragana">Hiragana</option>
+          <option value="katakana">Katakana</option>
+          <option value="both">Gemischt</option>
+        </select>
+      </label>
       <label>Block von: <select id="blockFrom"></select></label>
       <label>bis: <select id="blockTo"></select></label>
       <div class="toggles">
         <label>Anzeigemodus:
           <select id="mode">
-            <option value="kana">Hiragana → Romaji</option>
-            <option value="romaji">Romaji → Hiragana</option>
+            <option value="kana">Kana → Romaji</option>
+            <option value="romaji">Romaji → Kana</option>
           </select>
         </label>
         <label><input id="showSolution" type="checkbox"> Lösung zeigen?</label>
